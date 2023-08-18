@@ -6,7 +6,7 @@ char *getpath(char **env)
 
 	while (*env != NULL)
 	{
-		if (strncmp(*env, "PATH", 5) == 0)
+		if (strncmp(*env, "PATH=", 5) == 0)
 		{
 			path = *env + 5;
 			break;
