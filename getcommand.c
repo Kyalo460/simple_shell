@@ -1,6 +1,5 @@
 #include "main.h"
-/**
- * command - 
+
 char *command(char *token, char *env[])
 {
 	char *fullpath;
