@@ -8,9 +8,12 @@
 #include <sys/wait.h>
 #include <string.h>
 
-int fetch(char *token[]);
 char *command(char *token, char *env[]);
 char *getpath(char **env);
+int fetch(char *tokens[]);
 char *path(char *fullpath, char *command);
+char *_strdup(char *str);
+int _strncmp(char *str1, char *str2, int num);
+char *str_concat(char *s1, char *s2);
 
 #endif
