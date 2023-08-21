@@ -13,10 +13,7 @@ char *path(char *fullpath, char *command)
 		return (command);
 
 	if ((_strncmp(command, "exit", 4) == 0))
-		exit(2);
-
-	if ((_strncmp(command, "env", 3) == 0))
-		return ("/usr/bin/env");
+		exit(EXIT_SUCCESS);
 
 	pathslice = strtok(pathcopy, ":");
 
@@ -33,5 +30,5 @@ char *path(char *fullpath, char *command)
 
 	}
 
-	return (patharr);
+	return (command);
 }
