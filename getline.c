@@ -8,14 +8,11 @@
   */
 int fetch(char *tokens[])
 {
-	char *line;
+	char *line = NULL;
 	int read;
 	size_t bytes = 0, n = 0, prompts = 0;
 
 	tokens[0] = NULL;
-	line = malloc(1024);
-	if (line == NULL)
-		return (-1);
 
 	while (tokens[0] == NULL)
 	{
@@ -25,7 +22,7 @@ int fetch(char *tokens[])
 		read = getline(&line, &bytes, stdin);
 		if (read == -1)
 		{
-			printf("getline error\n");
+			perror("getline error\n");
 			exit(EXIT_FAILURE);
 		}
 
