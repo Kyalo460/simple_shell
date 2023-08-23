@@ -21,7 +21,7 @@ int fetch(char *tokens[])
 	{
 		prompts++;
 
-		printf("$ ");
+		write(STDOUT_FILENO, "$ ", 2);
 		read = getline(&line, &bytes, stdin);
 		if (read == -1)
 		{
