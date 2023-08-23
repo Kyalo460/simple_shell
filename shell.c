@@ -14,15 +14,11 @@ int main(__attribute__ ((unused)) int ac, char *av[], char *env[])
 {
 	char *tokens[5];
 	size_t prompts = 0;
-	int status = 0, acc, x;
+	int status = 0, acc;
 	pid_t pid;
-	bool check_pipe = false;
 
-	while ((status == 0 && !check_pipe))
+	while (1)
 	{
-		if (isatty(STDIN_FILENO) == 0)
-			check_pipe = true;
-
 		prompts += fetch(tokens);
 
 		tokens[0] = command(tokens[0], env);
@@ -35,23 +31,23 @@ int main(__attribute__ ((unused)) int ac, char *av[], char *env[])
 		if (acc != 0)
 		{
 			dispError(prompts, av[0], tokens[0]);
-			continue;
+			exit(127);
 		}
 
 		pid = fork();
 		if (pid == 0)
 		{
 			if (execve(tokens[0], tokens, env) == 1)
-				exit(EXIT_FAILURE);
+				exit(2);
 		}
 		if (pid != 0)
 		{
 			waitpid(pid, &status, 0);
-			for (x = 0; tokens[x] != NULL; x++)
-				free(tokens[x]);
+			if (status == 512)
+				exit(2);
 		}
 	}
-	return (0);
+	return (status);
 }
 
 /**
@@ -66,12 +62,12 @@ void dispError(int prompts, char *av, char *tokens)
 
 	intoa = array(prompts);
 
-	write(STDOUT_FILENO, av, _strlen(av));
-	write(STDOUT_FILENO, separator, _strlen(separator));
-	write(STDOUT_FILENO, intoa, _strlen(intoa));
-	write(STDOUT_FILENO, separator, _strlen(separator));
-	write(STDOUT_FILENO, tokens, _strlen(tokens));
-	write(STDOUT_FILENO, separator, _strlen(separator));
-	write(STDOUT_FILENO, error, _strlen(error));
+	write(STDERR_FILENO, av, _strlen(av));
+	write(STDERR_FILENO, separator, _strlen(separator));
+	write(STDERR_FILENO, intoa, _strlen(intoa));
+	write(STDERR_FILENO, separator, _strlen(separator));
+	write(STDERR_FILENO, tokens, _strlen(tokens));
+	write(STDERR_FILENO, separator, _strlen(separator));
+	write(STDERR_FILENO, error, _strlen(error));
 	free(intoa);
 }

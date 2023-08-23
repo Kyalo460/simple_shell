@@ -27,11 +27,15 @@ char *path(char *fullpath, char *command)
 		patharr = str_concat(patharr, command);
 
 		if (stat(patharr, &st) == 0)
+		{
+			free(pathcopy);
 			return (patharr);
+		}
 
 		pathslice = strtok(NULL, delim);
 
 	}
+	free(pathcopy);
 
 	return (command);
 }

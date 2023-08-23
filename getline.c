@@ -18,13 +18,13 @@ int fetch(char *tokens[])
 	{
 		prompts++;
 
-		write(STDOUT_FILENO, "$ ", 2);
+		if(isatty(STDIN_FILENO) != 0)
+			write(STDOUT_FILENO, "$ ", 2);
+
+		/*fflush(stdout);*/
 		read = getline(&line, &bytes, stdin);
 		if (read == -1)
-		{
-			perror("getline error\n");
-			exit(EXIT_FAILURE);
-		}
+			exit(EXIT_SUCCESS);
 
 		tokens[n] = strtok(line, " \n");
 		while (tokens[n] != NULL)
@@ -32,6 +32,7 @@ int fetch(char *tokens[])
 			n++;
 			tokens[n] = strtok(NULL, " \n");
 		}
+
 	}
 	return (prompts);
 }
