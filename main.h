@@ -16,5 +16,6 @@ char *_strdup(char *str);
 int _strncmp(char *str1, char *str2, int num);
 char *str_concat(char *s1, char *s2);
 int dispEnv(char **env);
+void _free(char **tokens);
 
 #endif
