@@ -1,5 +1,11 @@
 #include "main.h"
 
+/**
+  *getpath - extracts the PATH value from environment
+  *@env: the environment
+  *
+  *Return: returns a pointer to the PATH value
+  */
 char *getpath(char **env)
 {
 	char *path;
