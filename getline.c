@@ -21,7 +21,7 @@ int fetch(char *tokens[])
 	{
 		prompts++;
 
-		printf("testShell~$ ");
+		printf("$ ");
 		read = getline(&line, &bytes, stdin);
 		if (read == -1)
 		{
