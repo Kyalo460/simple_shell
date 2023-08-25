@@ -23,5 +23,6 @@ int dispEnv(char **env)
 		write(1, newline, 1);
 		i++;
 	}
+	fflush(stdout);
 	return (0);
 }

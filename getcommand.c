@@ -9,12 +9,13 @@
   */
 char *command(char *token, char *env[])
 {
-	char *fullpath;
-	char *command;
+	char *fullpath = NULL;
+	char *command = NULL;
 
 	if (_strncmp(token, "env", 3) == 0)
 	{
 		dispEnv(env);
+		/*free(token);*/
 		return (token);
 	}
 

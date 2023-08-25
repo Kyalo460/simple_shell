@@ -6,9 +6,8 @@
   *
   *Return: returns the number of prompts outputed to stdout
   */
-int fetch(char *tokens[])
+size_t fetch(char *tokens[], char **line)
 {
-	char *line = NULL;
 	int read;
 	size_t bytes = 0, n = 0, prompts = 0;
 
@@ -18,21 +17,24 @@ int fetch(char *tokens[])
 	{
 		prompts++;
 
-		if(isatty(STDIN_FILENO) != 0)
+		if (isatty(STDIN_FILENO) != 0)
 			write(STDOUT_FILENO, "$ ", 2);
-
-		/*fflush(stdout);*/
-		read = getline(&line, &bytes, stdin);
+		read = getline(line, &bytes, stdin);
 		if (read == -1)
 			exit(EXIT_SUCCESS);
 
-		tokens[n] = strtok(line, " \n");
+		tokens[n] = strtok(*line, " \n");
 		while (tokens[n] != NULL)
 		{
 			n++;
 			tokens[n] = strtok(NULL, " \n");
 		}
 
+	}
+	if (_strncmp(tokens[0], "exit", 4) == 0)
+	{
+		free(*line);
+		exit(EXIT_SUCCESS);
 	}
 	return (prompts);
 }

@@ -32,6 +32,7 @@ char *array(size_t n)
 		n_copy /= 10;
 		index++;
 	}
+	ptr[index] = '\0';
 	new = rev(ptr, num);
 	free(ptr);
 	return (new);
@@ -64,8 +65,6 @@ char *rev(char *ptr, size_t n)
 		index--;
 	}
 	array[idx] = '\0';
-	ptr = _strdup(array);
-	free(array);
 
-	return (ptr);
+	return (array);
 }

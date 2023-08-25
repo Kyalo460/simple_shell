@@ -9,28 +9,30 @@
   */
 char *path(char *fullpath, char *command)
 {
-	char *pathslice, *delim = ":", *patharr;
-	char *pathcopy = _strdup(fullpath);
+	char *pathslice = NULL, *delim = ":", *patharr, *placeholder;
+	char *pathcopy = NULL;
 	struct stat st;
 
 	if (stat(command, &st) == 0)
 		return (command);
 
-	if ((_strncmp(command, "exit", 4) == 0))
-		exit(EXIT_SUCCESS);
+	pathcopy = _strdup(fullpath);
 
 	pathslice = strtok(pathcopy, delim);
 
 	while (pathslice != NULL)
 	{
 		patharr = str_concat(pathslice, "/");
+		placeholder = patharr;
 		patharr = str_concat(patharr, command);
+		free(placeholder);
 
 		if (stat(patharr, &st) == 0)
 		{
 			free(pathcopy);
 			return (patharr);
 		}
+		free(patharr);
 
 		pathslice = strtok(NULL, delim);
 

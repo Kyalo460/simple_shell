@@ -23,6 +23,8 @@ char *_strdup(char *str)
 	for (r = 0; str[r]; r++)
 		aaa[r] = str[r];
 
+	aaa[r] = '\0';
+
 	return (aaa);
 }
 
