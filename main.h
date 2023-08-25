@@ -20,6 +20,5 @@ char *str_concat(char *s1, char *s2);
 int dispEnv(char **env);
 char *array(size_t n);
 int _strlen(char *s);
-void _free(char **tokens);
 
 #endif
