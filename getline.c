@@ -3,6 +3,7 @@
 /**
   *fetch - gets input from user
   *@tokens: this is where each argument is stored separately
+  *@line: string holding input
   *
   *Return: returns the number of prompts outputed to stdout
   */
