@@ -44,9 +44,10 @@ int main(__attribute__ ((unused)) int ac, char *av[], char *env[])
 		if (pid != 0)
 		{
 			waitpid(pid, &status, 0);
-			/*if (tokens[0] != line && tokens[0] != NULL)*/
-				/*free(tokens[0]);*/
 			free(line);
+			line = NULL;
+			if (tokens[0] != NULL)
+				free(tokens[0]);
 			if (status == 512)
 				exit(2);
 		}

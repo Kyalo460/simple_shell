@@ -14,17 +14,19 @@ char *path(char *fullpath, char *command)
 	struct stat st;
 
 	if (stat(command, &st) == 0)
-		return (command);
+	{
+		patharr = _strdup(command);
+		return (patharr);
+	}
 
 	pathcopy = _strdup(fullpath);
-
 	pathslice = strtok(pathcopy, delim);
 
 	while (pathslice != NULL)
 	{
 		patharr = str_concat(pathslice, "/");
 		placeholder = patharr;
-		patharr = str_concat(patharr, command);
+		patharr = str_concat(placeholder, command);
 		free(placeholder);
 
 		if (stat(patharr, &st) == 0)
