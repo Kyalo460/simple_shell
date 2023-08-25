@@ -12,7 +12,7 @@
 
 char *command(char *token, char *env[]);
 char *getpath(char **env);
-int fetch(char *tokens[]);
+size_t fetch(char *tokens[], char **line);
 char *path(char *fullpath, char *command);
 char *_strdup(char *str);
 int _strncmp(char *str1, char *str2, int num);
